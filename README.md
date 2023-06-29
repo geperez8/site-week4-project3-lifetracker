@@ -63,8 +63,8 @@ Implement any of the following features to improve the application:
     - [X] `/login` - Render the `LoginPage` component
     - [X] `/register` - Render the `RegistrationPage` component
     - [X] `/activity` - Render the `ActivityPage` component **only** if the user is logged in, otherwise it renders the `AccessForbidden` component
-    - [ ] `/nutrition/*` - Render the `NutritionPage`component **only** if the user is logged in, otherwise it renders the`AccessForbidden` component
-    - [ ] `*` - Anything else renders the `NotFound` component
+    - [X] `/nutrition/*` - Render the `NutritionPage`component **only** if the user is logged in, otherwise it renders the`AccessForbidden` component
+    - [X] `*` - Anything else renders the `NotFound` component
 
 #### Handling API Requests
 
