@@ -56,13 +56,13 @@ Implement any of the following features to improve the application:
 
 - [ ] Build the `App` component to:
   - [X] Be wrapped by an element with the class name of `app`
-  - [ ] Contain the routes for the app
-  - [ ] Render the `Navbar` component on every route
-  - [ ] Render a `BrowserRouter` component that contains a `Routes` component with the following routes:
-    - [ ] `/` - Render the `Landing` component
-    - [ ] `/login` - Render the `LoginPage` component
-    - [ ] `/register` - Render the `RegistrationPage` component
-    - [ ] `/activity` - Render the `ActivityPage` component **only** if the user is logged in, otherwise it renders the `AccessForbidden` component
+  - [X] Contain the routes for the app
+  - [X] Render the `Navbar` component on every route
+  - [X] Render a `BrowserRouter` component that contains a `Routes` component with the following routes:
+    - [X] `/` - Render the `Landing` component
+    - [X] `/login` - Render the `LoginPage` component
+    - [X] `/register` - Render the `RegistrationPage` component
+    - [X] `/activity` - Render the `ActivityPage` component **only** if the user is logged in, otherwise it renders the `AccessForbidden` component
     - [ ] `/nutrition/*` - Render the `NutritionPage`component **only** if the user is logged in, otherwise it renders the`AccessForbidden` component
     - [ ] `*` - Anything else renders the `NotFound` component
 
