@@ -1,9 +1,14 @@
 import React from 'react'
 import "./Navbar.css"
+import NavLinks from '../NavLinks/NavLinks'
+import { Link } from 'react-router-dom'
 
-function Navbar() {
+function Navbar({isLoggedin}) {
   return (
-    <div>Navbar</div>
+    <nav className='navbar'>
+        <Link to = "/"><img className='logo' src="src/assets/fitness-logo.png" alt='image of man and woman running'/></Link>
+        <NavLinks isLoggedin={isLoggedin}/>
+    </nav>
   )
 }
 

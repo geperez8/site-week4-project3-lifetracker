@@ -12,11 +12,11 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 
 function App() {
-  const loggedin = false //temporary definition
+  const isLoggedin = true //temporary definition
   return (
     <div className='app'>
       <Router>
-        <Navbar /> <br/>
+        <Navbar isLoggedin={isLoggedin}/> <br/>
         <main>
             
           <div>
@@ -24,8 +24,8 @@ function App() {
               <Route path = "/" element = {<Landing />}></Route>
               <Route path = "/login" element = {<LoginPage />}></Route>
               <Route path = "/register" element = {<RegistrationPage />}></Route>
-              <Route path = "/activity" element = {loggedin ? <ActivityPage /> : <AccessForbidden />}></Route>
-              <Route path = "/nutririon/*" element = {loggedin ? <NutritionPage /> : <AccessForbidden />}></Route>
+              <Route path = "/activity" element = {isLoggedin ? <ActivityPage /> : <AccessForbidden />}></Route>
+              <Route path = "/nutrition/*" element = {isLoggedin ? <NutritionPage /> : <AccessForbidden />}></Route>
               <Route path = "*" element = {<NotFound />}></Route>
             </Routes>
           </div>
