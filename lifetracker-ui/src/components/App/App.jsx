@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 
 function App() {
-  const isLoggedin = true //temporary definition
+  const isLoggedin = false //temporary definition
   return (
     <div className='app'>
       <Router>
