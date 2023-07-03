@@ -17,6 +17,10 @@ const getDatabaseUri = () => {
 
 }
 
+const BCRYPT_WORK_FACTOR = process.env.BCRYPT_WORK_FACTOR
+
+const SECRET_KEY = process.env.SECRET_KEY
+
 console.log("Vaccine API config".red)
 console.log("PORT:".blue, PORT)
 console.log("Database URI:".blue, getDatabaseUri())
@@ -24,5 +28,7 @@ console.log("-----")
 
 module.exports = {
     PORT,
-    getDatabaseUri
+    getDatabaseUri,
+    BCRYPT_WORK_FACTOR,
+    SECRET_KEY
 }

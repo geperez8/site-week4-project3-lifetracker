@@ -45,47 +45,54 @@ class User {
             }
         })
 
+        console.log("fields checked")
+
         if (credentials.email.indexOf("@") <= 0){
             throw new BadRequestError("Invalid email.")
         }
+
+        console.log("email checked")
         //
         // make sure no user already exists in the system with the email
         // if one does, throw an error
-        const existingUser = await User.fetchUserByEmail(credentials.email)
+        const existingEmail = await User.fetchUserByEmail(credentials.email)
 
-        if(existingUser){
+        if(existingEmail){
             throw new BadRequestError(`Duplicate email: ${credentials.email}`)
         }
 
-        if (!email){
-            throw new BadRequestError("No email provided")
+        console.log("email duplictae check")
+
+        const existingUser = await User.fetchUserByUsername(credentials.username)
+
+        if(existingUser){
+            throw new BadRequestError(`Duplicate usernam: ${credentials.username}`)
         }
 
-        const query = `SELECT * FROM users WHERE username = $1`
-
-        const usernameResult = await db.query(query, [username])
-
-        const username = usernameResult.rows[0]
+        console.log("username checked")
 
         const lowercasedEmail = credentials.email.toLowerCase()
 
-        const hashedPassword = await bcrypt.hash(credentials.password, BCRYPT_WORK_FACTOR)
+        const saltRounds = 10;
+        
+        const salt = await bcrypt.genSalt(saltRounds);
+
+        const hashedPassword = await bcrypt.hash(credentials.password, salt)
+
         //
         // create a new user in the db with all their info
         // return the user
         const result = await db.query(`
         INSERT INTO users (
+            username,
             password,
             first_name,
             last_name,
-            email,
-            location,
-            date
+            email
         )
-        VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING password, first_name, last_name, email, location, date;`,
-        [hashedPassword, credentials.first_name, credentials.last_name, lowercasedEmail, credentials.location, credentials.date])
-
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING username, password, first_name, last_name, email;`,
+        [credentials.username, hashedPassword, credentials.first_name, credentials.last_name, lowercasedEmail])
         const user = result.rows[0]
 
         return user
@@ -99,6 +106,23 @@ class User {
         const query = `SELECT * FROM users WHERE email = $1`
 
         const result = await db.query(query, [email.toLowerCase()])
+
+        const user = result.rows[0]
+
+        return user
+
+
+    }
+
+    static async fetchUserByUsername(username){
+
+        if (!username){
+            throw new BadRequestError("No username provided")
+        }
+
+        const query = `SELECT * FROM users WHERE username = $1`
+
+        const result = await db.query(query, [username.toLowerCase()])
 
         const user = result.rows[0]
 
