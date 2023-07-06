@@ -12,7 +12,6 @@ const jwtFrom =  ({headers}) => {
         const [scheme, token] = headers.authorization.split(" ")
 
         if (scheme.trim() === "Bearer"){
-            console.log("this runs")
             return token
         }
     }
@@ -24,7 +23,7 @@ const jwtFrom =  ({headers}) => {
 const extractUserFromJwt = (req, res, next) => {
     try {
         const token = jwtFrom(req)
-
+        
         if (token){
             res.locals.user = jwt.verify(token, SECRET_KEY)
         }

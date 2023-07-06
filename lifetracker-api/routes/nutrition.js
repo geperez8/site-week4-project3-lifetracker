@@ -14,16 +14,16 @@ nutritionRouter.post("/", async (req, res, next) => {
   }
 });
 
-// nutritionRouter.get("/$id", async (req, res, next) => {
-//   try {
-//     const { email } = res.locals.user;
+nutritionRouter.get("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params
 
-//     const user = await User.fetchUserByEmail(email);
-//     // const publicUser = User.makePublicUser(user)
-//     return res.status(200).json({ user: user });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+    const data = await Nutrition.fetchNutritionById(id)
+    // const publicUser = User.makePublicUser(user)
+    return res.status(200).json({ nutritionData: data });
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = nutritionRouter;

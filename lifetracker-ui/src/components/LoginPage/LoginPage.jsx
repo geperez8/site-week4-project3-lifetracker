@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import "./LoginPage.css"
 
 function LoginPage({loginError, onLogin}) {
@@ -9,11 +10,18 @@ function LoginPage({loginError, onLogin}) {
     setForm({... form})
   }
 
-  const handleSubmit = (event) => {
+  let navigate = useNavigate();
+  
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const status = onLogin(form);
+    const status = await onLogin(form);
 
     console.log(status)
+
+    if (status){
+      navigate("/activity")
+    }
   };
   return (
     <div>

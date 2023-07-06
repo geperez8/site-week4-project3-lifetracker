@@ -5,8 +5,6 @@ class Nutrition {
   static async nutritionPost(nutritionData) {
     // user should submit their email, pw rsvp status, and # of guests
     // if any of these fields are missing, throw an error
-    console.log(nutritionData)
-
     const requiredFields = [
       "name",
       "category",
@@ -58,12 +56,18 @@ class Nutrition {
 
     const result = await db.query(query, [userId]);
 
-    const user = result.rows[0];
+    const nutritionData = result.rows;
 
-    return user;
+    return nutritionData;
   }
 }
 
+const test = async () => {
+  merp = await Nutrition.fetchNutritionById(21);
 
+  console.log(merp);
+};
+
+test();
 
 module.exports = Nutrition;

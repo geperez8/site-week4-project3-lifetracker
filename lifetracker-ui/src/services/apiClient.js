@@ -61,7 +61,15 @@ class ApiClient {
       method: "POST",
       data: nutritionInfo,
     });
-  }
+  };
+
+  // fetchUserFromToken = async () => {
+  //   return await this.request({
+  //     endpoint: "nutrition",
+  //     method: "POST",
+  //     data: nutritionInfo,
+  //   });
+  // };
 }
 
 export default new ApiClient("http://localhost:3001");

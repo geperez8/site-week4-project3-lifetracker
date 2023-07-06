@@ -42,7 +42,7 @@ function NutritionPage({ user, onSubmitNutrition }) {
         />
         <br />
         <select name="category" onChange={formChangeHandler}>
-          <option value="snack">Select a category</option>
+          <option value= "beverage">Select a category</option>
           <option value="snack">Snack</option>
           <option value="beverage">Beverage</option>
           <option value="food">Food</option>

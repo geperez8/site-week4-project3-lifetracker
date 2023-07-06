@@ -1,5 +1,5 @@
 import "./App.css";
-import react, { useEffect, useState } from "react";
+import react, { useEffect, useState} from "react";
 import ApiClient from "../../services/apiClient";
 import Navbar from "../Navbar/Navbar.jsx";
 import Landing from "../Landing/Landing";
@@ -9,7 +9,7 @@ import ActivityPage from "../ActivityPage/ActivityPage";
 import NutritionPage from "../NutritionPage/NutritionPage";
 import AccessForbidden from "../AccessForbidden/AccessForbidden";
 import NotFound from "../NotFound/NotFound";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link  } from "react-router-dom";
 import apiClient from "../../services/apiClient";
 
 function App() {
@@ -18,6 +18,8 @@ function App() {
   const [registrationError, setRegistrationError] = useState("");
   const [user, setUser] = useState({});
 
+  
+
   useEffect(() => {
     const fetchUser = async () => {
       const { data, error } = await apiClient.fetchUserFromToken();
@@ -25,6 +27,8 @@ function App() {
         setUser({ user_id: data.user.id });
         setLoggedIn(true);
         console.log(data.user);
+
+        // const {data, error} = await apiClient.fetchUserNutrition
       }
     };
 
@@ -41,6 +45,7 @@ function App() {
 
     if (error) {
       setRegistrationError(error);
+      return false
     }
 
     if (data?.user) {
@@ -48,6 +53,7 @@ function App() {
       ApiClient.setToken(data.token);
       setLoggedIn(true);
       setRegistrationError("");
+      return true
     }
   };
 
@@ -57,6 +63,7 @@ function App() {
     console.log("error:", error);
     if (error) {
       setLoginError(error);
+      return false
     }
 
     if (data?.user) {
@@ -64,6 +71,7 @@ function App() {
       ApiClient.setToken(data.token);
       setLoggedIn(true);
       setLoginError("");
+      return true
     }
   };
 
@@ -71,10 +79,15 @@ function App() {
     const { data, error } = await ApiClient.postNutrition(nutritionInfo);
   };
 
+  const logoutUser = () => {
+    localStorage.setItem("LifetrackerToken", null);
+    setLoggedIn(false)
+  }
+
   return (
     <div className="app">
       <Router>
-        <Navbar loggedin={loggedin} /> <br />
+        <Navbar loggedin={loggedin} logoutUser={logoutUser}/> <br />
         <main>
           <div>
             <Routes>

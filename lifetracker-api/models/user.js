@@ -51,13 +51,10 @@ class User {
       }
     });
 
-    console.log("fields checked");
-
     if (credentials.email.indexOf("@") <= 0) {
       throw new BadRequestError("Invalid email.");
     }
 
-    console.log("email checked");
     //
     // make sure no user already exists in the system with the email
     // if one does, throw an error
@@ -67,15 +64,11 @@ class User {
       throw new BadRequestError(`Duplicate email: ${credentials.email}`);
     }
 
-    console.log("email duplictae check");
-
     const existingUser = await User.fetchUserByUsername(credentials.username);
 
     if (existingUser) {
       throw new BadRequestError(`Duplicate usernam: ${credentials.username}`);
     }
-
-    console.log("username checked");
 
     const lowercasedEmail = credentials.email.toLowerCase();
 
@@ -130,7 +123,7 @@ class User {
     if (!username) {
       throw new BadRequestError("No username provided");
     }
-
+    
     const query = `SELECT * FROM users WHERE username = $1`;
 
     const result = await db.query(query, [username.toLowerCase()]);
