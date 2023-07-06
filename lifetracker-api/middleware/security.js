@@ -9,17 +9,22 @@ const jwtFrom =  ({headers}) => {
     if (headers?.authorization){
         // Authorization: Bearer bvibviiruee
         
-        const [scheme, token] = header.authorization.split(" ")
+        const [scheme, token] = headers.authorization.split(" ")
+
         if (scheme.trim() === "Bearer"){
+            console.log("this runs")
             return token
         }
     }
+
+    return undefined
 }
 
 // * function to attach the user to the res object
 const extractUserFromJwt = (req, res, next) => {
     try {
         const token = jwtFrom(req)
+
         if (token){
             res.locals.user = jwt.verify(token, SECRET_KEY)
         }

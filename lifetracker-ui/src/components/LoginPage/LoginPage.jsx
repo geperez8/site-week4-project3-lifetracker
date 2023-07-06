@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import "./LoginPage.css"
 
 function LoginPage({loginError, onLogin}) {
-  const [form, setForm] = useState({"email":"", "name":""})
+  const [form, setForm] = useState({"email":"", "password":""})
 
   const handleOnInputChange = (e) => {
     form[e.target.name] = e.target.value
@@ -14,10 +14,6 @@ function LoginPage({loginError, onLogin}) {
     const status = onLogin(form);
 
     console.log(status)
-
-    // if (status){
-    //   useNavigate("/")
-    // }
   };
   return (
     <div>
@@ -50,8 +46,9 @@ function LoginPage({loginError, onLogin}) {
             <button type="submit">Login</button>
           </div>
 
-          <p>{loginError}</p>
+          
         </form>
+        <p>{loginError}</p>
     </div>
   )
 }

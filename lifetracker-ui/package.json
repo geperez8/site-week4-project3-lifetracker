@@ -15,7 +15,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
-    "react-router-dom": "^6.14.0"
+    "react-router-dom": "^6.14.1"
+  },
+  "resolutions": {
+    "d2/left-pad": "1.1.1",
+    "c/**/left-pad": "^1.1.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

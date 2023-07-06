@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { useNavigate } from 'react-router-dom'
 import "./RegistrationPage.css"
 
 function RegistrationPage({onRegister, registrationError}) {
@@ -17,9 +16,6 @@ function RegistrationPage({onRegister, registrationError}) {
 
     console.log(status)
 
-    if (status){
-      useNavigate("/")
-    }
   };
 
   return (
