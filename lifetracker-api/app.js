@@ -5,6 +5,7 @@ const cors = require("cors");
 const { NotFoundError } = require("./utils/errors");
 const authRoutes = require("../lifetracker-api/routes/auth");
 const security = require("../lifetracker-api/middleware/security");
+const nutritionRoutes = require("../lifetracker-api/routes/nutrition")
 
 // mount the middleware
 app.use(cors());
@@ -15,7 +16,11 @@ app.use(express.json());
 app.use(security.extractUserFromJwt);
 
 //routes
+app.use("/nutrition", nutritionRoutes)
+
 app.use("/auth", authRoutes);
+
+
 
 app.use((req, res, next) => {
   return next(new NotFoundError());

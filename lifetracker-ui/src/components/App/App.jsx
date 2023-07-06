@@ -18,22 +18,23 @@ function App() {
   const [registrationError, setRegistrationError] = useState("");
   const [user, setUser] = useState({});
 
-  useEffect( () => {
+  useEffect(() => {
     const fetchUser = async () => {
-      const {data, error} = await apiClient.fetchUserFromToken()
-      if (data){
-        setUser(data.user)
-        setLoggedIn(true)
-      }    
-    }
+      const { data, error } = await apiClient.fetchUserFromToken();
+      if (data) {
+        setUser({ user_id: data.user.id });
+        setLoggedIn(true);
+        console.log(data.user);
+      }
+    };
 
-    const token = localStorage.getItem('LifetrackerToken')
+    const token = localStorage.getItem("LifetrackerToken");
 
-    if (token){
-      apiClient.setToken(token)
-      fetchUser()
+    if (token) {
+      apiClient.setToken(token);
+      fetchUser();
     }
-  }, [])
+  }, []);
 
   const handleRegistration = async (registrationInfo) => {
     const { data, error } = await ApiClient.registerUser(registrationInfo);
@@ -45,15 +46,15 @@ function App() {
     if (data?.user) {
       setUser(data.user);
       ApiClient.setToken(data.token);
-      setLoggedIn(true)
-      setRegistrationError("")
+      setLoggedIn(true);
+      setRegistrationError("");
     }
   };
 
   const handleLogin = async (loginInfo) => {
     const { data, error } = await ApiClient.loginUser(loginInfo);
-    console.log("data:", data)
-    console.log("error:", error)
+    console.log("data:", data);
+    console.log("error:", error);
     if (error) {
       setLoginError(error);
     }
@@ -61,9 +62,13 @@ function App() {
     if (data?.user) {
       setUser(data.user);
       ApiClient.setToken(data.token);
-      setLoggedIn(true)
-      setLoginError("")
+      setLoggedIn(true);
+      setLoginError("");
     }
+  };
+
+  const handleNutritionPost = async (nutritionInfo) => {
+    const { data, error } = await ApiClient.postNutrition(nutritionInfo);
   };
 
   return (
@@ -95,7 +100,9 @@ function App() {
               ></Route>
               <Route
                 path="/nutrition/*"
-                element={loggedin ? <NutritionPage /> : <AccessForbidden />}
+                element={
+                  loggedin ? <NutritionPage user={user} onSubmitNutrition={handleNutritionPost}/> : <AccessForbidden />
+                }
               ></Route>
               <Route path="*" element={<NotFound />}></Route>
             </Routes>
