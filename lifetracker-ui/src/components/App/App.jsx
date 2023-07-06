@@ -1,5 +1,5 @@
 import "./App.css";
-import react, { useEffect, useState} from "react";
+import react, { useEffect, useState } from "react";
 import ApiClient from "../../services/apiClient";
 import Navbar from "../Navbar/Navbar.jsx";
 import Landing from "../Landing/Landing";
@@ -9,7 +9,7 @@ import ActivityPage from "../ActivityPage/ActivityPage";
 import NutritionPage from "../NutritionPage/NutritionPage";
 import AccessForbidden from "../AccessForbidden/AccessForbidden";
 import NotFound from "../NotFound/NotFound";
-import { BrowserRouter as Router, Routes, Route, Link  } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import apiClient from "../../services/apiClient";
 
 function App() {
@@ -17,7 +17,6 @@ function App() {
   const [loginError, setLoginError] = useState("");
   const [registrationError, setRegistrationError] = useState("");
   const [user, setUser] = useState({});
-
   
 
   useEffect(() => {
@@ -28,7 +27,7 @@ function App() {
         setLoggedIn(true);
         console.log(data.user);
 
-        // const {data, error} = await apiClient.fetchUserNutrition
+        
       }
     };
 
@@ -45,7 +44,7 @@ function App() {
 
     if (error) {
       setRegistrationError(error);
-      return false
+      return false;
     }
 
     if (data?.user) {
@@ -53,7 +52,7 @@ function App() {
       ApiClient.setToken(data.token);
       setLoggedIn(true);
       setRegistrationError("");
-      return true
+      return true;
     }
   };
 
@@ -63,7 +62,7 @@ function App() {
     console.log("error:", error);
     if (error) {
       setLoginError(error);
-      return false
+      return false;
     }
 
     if (data?.user) {
@@ -71,7 +70,7 @@ function App() {
       ApiClient.setToken(data.token);
       setLoggedIn(true);
       setLoginError("");
-      return true
+      return true;
     }
   };
 
@@ -81,13 +80,13 @@ function App() {
 
   const logoutUser = () => {
     localStorage.setItem("LifetrackerToken", null);
-    setLoggedIn(false)
-  }
+    setLoggedIn(false);
+  };
 
   return (
     <div className="app">
       <Router>
-        <Navbar loggedin={loggedin} logoutUser={logoutUser}/> <br />
+        <Navbar loggedin={loggedin} logoutUser={logoutUser} /> <br />
         <main>
           <div>
             <Routes>
@@ -114,7 +113,14 @@ function App() {
               <Route
                 path="/nutrition/*"
                 element={
-                  loggedin ? <NutritionPage user={user} onSubmitNutrition={handleNutritionPost}/> : <AccessForbidden />
+                  loggedin ? (
+                    <NutritionPage
+                      user={user}
+                      onSubmitNutrition={handleNutritionPost}
+                    />
+                  ) : (
+                    <AccessForbidden />
+                  )
                 }
               ></Route>
               <Route path="*" element={<NotFound />}></Route>

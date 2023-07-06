@@ -1,7 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, user } from "react";
+import apiClient from "../../services/apiClient";
+import NutritionCard from "../NutritionCard/NutritionCard";
 import "../NutritionPage/NutritionPage.css";
 
 function NutritionPage({ user, onSubmitNutrition }) {
+  const [nutritionData, setNutritionData] = useState([]);
+
+  useEffect(() => {
+    const nutritionLoader = async (userId) => {
+      console.log(userId);
+      const { data, error } = await apiClient.fetchUserNutrition(userId);
+
+      setNutritionData(data.nutritionData);
+    };
+
+    nutritionLoader(user.user_id);
+
+    console.log(user);
+  }, [user]);
+
   const [form, setForm] = useState({
     name: "",
     category: "",
@@ -19,6 +36,7 @@ function NutritionPage({ user, onSubmitNutrition }) {
   const handleNutritionSave = (event) => {
     event.preventDefault();
     const status = onSubmitNutrition(form);
+    setNutritionData([ ...nutritionData, form ]);
     setForm({
       name: "",
       category: "",
@@ -42,7 +60,7 @@ function NutritionPage({ user, onSubmitNutrition }) {
         />
         <br />
         <select name="category" onChange={formChangeHandler}>
-          <option value= "beverage">Select a category</option>
+          <option value="beverage">Select a category</option>
           <option value="snack">Snack</option>
           <option value="beverage">Beverage</option>
           <option value="food">Food</option>
@@ -75,8 +93,15 @@ function NutritionPage({ user, onSubmitNutrition }) {
           onChange={formChangeHandler}
         />
         <br />
-        <button type="submit">Register</button>
+        <button type="submit">Save</button>
       </form>
+
+      <h1>Nutrition Data</h1>
+      <div>
+        {nutritionData.map((data) => (
+          <NutritionCard nutritionData={data}/>
+        ))}
+      </div>
     </div>
   );
 }

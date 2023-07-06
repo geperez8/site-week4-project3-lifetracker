@@ -32,7 +32,7 @@ class Nutrition {
             user_id
         )
         VALUES ($1, $2, $3, $4, $5)
-        RETURNING name, category, calories, image_url, user_id;`,
+        RETURNING id, name, category, calories, image_url, user_id;`,
       [
         nutritionData.name,
         nutritionData.category,
