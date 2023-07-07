@@ -1,7 +1,7 @@
 .NutritionPage {
   background: #f7fafc;
 }
-.NutritionPage .nutrition-feed {
+.nutrition-feed {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -16,4 +16,58 @@
 }
 .NutritionPage .button button {
   flex: 1;
+}
+
+.nutrition-form {
+  background-color: lightgray;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 90px;
+  text-align: center;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: center;
+}
+
+.nutrition-page{
+  text-align: center;
+}
+
+select {
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  margin-bottom: 15px;
+}
+
+.save {
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  border-width: 0;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 8px 20px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.nutrition-holder{
+  display: list-item;
+  margin-left:400px;
+  margin-right: 400px;
 }

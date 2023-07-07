@@ -1,12 +1,12 @@
 .navbar {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   margin: 0;
-  padding: 0;
+  text-align: center;
 }
 
 .logo{
   width: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
 }

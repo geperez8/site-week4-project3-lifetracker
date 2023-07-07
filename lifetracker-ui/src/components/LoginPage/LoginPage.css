@@ -1,0 +1,59 @@
+.login {
+  background-color: lightgray;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 90px;
+  text-align: center;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: center;
+}
+
+.label{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.error{
+  color: red;
+}
+
+.login-container{
+  text-align: center;
+  padding-top: 100px;
+}
+
+.input-field {
+  width: 250px;
+  padding: 10px 20px;
+  border: none;
+  font-size: 15px;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  margin-bottom: 15px;
+}
+
+/* CSS */
+.account-button {
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  border-width: 0;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 8px 20px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}

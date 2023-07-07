@@ -12,7 +12,7 @@ nutritionRouter.post("/", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});
+}); 
 
 nutritionRouter.get("/:id", async (req, res, next) => {
   try {

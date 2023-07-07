@@ -25,9 +25,6 @@ function App() {
       if (data) {
         setUser({ user_id: data.user.id });
         setLoggedIn(true);
-        console.log(data.user);
-
-        
       }
     };
 
@@ -67,6 +64,7 @@ function App() {
 
     if (data?.user) {
       setUser(data.user);
+      console.log("in log in, it is", user)
       ApiClient.setToken(data.token);
       setLoggedIn(true);
       setLoginError("");
@@ -76,6 +74,7 @@ function App() {
 
   const handleNutritionPost = async (nutritionInfo) => {
     const { data, error } = await ApiClient.postNutrition(nutritionInfo);
+
   };
 
   const logoutUser = () => {
